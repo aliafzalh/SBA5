@@ -55,6 +55,16 @@ app.get("/crash", (req, res) => {
     throw new Error("Server crash!");
 })
 
+// Error-Handling Middleware
+app.use((err, req, res, next) => {
+  console.error("ERROR:", err.stack);
+  res.status(500).send("Something went wrong.");
+});
+
+function readData(fileName) {
+  const data = fs.readFileSync(`./data/${fileName}`, "utf-8");
+  return JSON.parse(data);
+}
 
 
 
