@@ -66,8 +66,23 @@ function readData(fileName) {
   return JSON.parse(data);
 }
 
+// GET all users
+app.get("/users", (req, res) => {
+  const users = readData("users.json");
+  res.json(users);
+});
 
+// GET all posts
+app.get("/posts", (req, res) => {
+  const posts = readData("posts.json");
+  res.json(posts);
+});
 
+// GET all comments
+app.get("/comments", (req, res) => {
+  const comments = readData("comments.json");
+  res.json(comments);
+});
 
 
 app.listen(PORT, ()=> {
