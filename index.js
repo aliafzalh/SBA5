@@ -18,6 +18,44 @@ app.use(express.json())
 //     res.send(`Form submitted`)
 // })
 
+//Custom middleware
+function logRequest(req, res, next) {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${req.method} ${req.url}`);
+  next();
+}
+app.use(logRequest);
+
+//middleware 2
+function passwordCheck(req, res, next) {
+    const password = req.body["password"];
+    if(password === "12345"){
+        req.userIsAuthorised = true;
+    }else {
+        req.userIsAuthorised = false}
+    next();
+}
+
+app.get(`/`, (req, res) =>{
+    console.log(__dirname + "/index.html")
+    res.sendFile(__dirname + "/index.html")
+})
+
+// Form submission route (protected)
+app.post("/submit", passwordCheck, (req, res) => {
+  if (req.userIsAuthorised) {
+    res.send("Welcome authorized user.");
+  } else {
+    res.send("Access denied.");
+  }
+});
+
+app.get("/crash", (req, res) => {
+    // res.send(crash)});
+    throw new Error("Server crash!");
+})
+
+
 
 
 
