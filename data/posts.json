@@ -1,0 +1,14 @@
+[
+  {
+    "id": 101,
+    "userId": 1,
+    "title": "My first post",
+    "content": "This is my first blog post!"
+  },
+  {
+    "id": 102,
+    "userId": 2,
+    "title": "Bob's thoughts",
+    "content": "I like programming in JavaScript."
+  }
+]
